@@ -47,6 +47,14 @@ public class OpenEmr {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(driver.findElement(By.id("modalframe")));
 		driver.findElement(By.xpath("//input[@value='Confirm Create New Patient']")).click();
+		 Thread.sleep(3000);
+	    driver.switchTo().alert().accept();
+	    driver.findElement(By.xpath("//div[@class='closeDlgIframe']")).click();
+	     // driver.switchTo().frame(driver.findElement(By.name("timeout")));
+	     // Actions act1=new Actions(driver);
+	     act.moveToElement(driver.findElement(By.xpath("//div[@class='menuSection userSection']"))).build().perform();
+	      driver.findElement(By.xpath("//ul//li[text()='Logout']")).click();
+	    
 		
 	}
 
