@@ -1,3 +1,60 @@
+//17-04-2019 (openEmr assignment)
+package initialize;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+public class OpenEmr {
+	public static void main(String[] args) throws InterruptedException
+	{
+		WebDriver driver = new EdgeDriver();
+		System.setProperty("webdriver.edge.driver","SeleniumBasics2/MicrosoftWebDriver.exe");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.get(" https://demo.openemr.io/d/openemr");
+		driver.findElement(By.id("authUser")).sendKeys("admin");
+		driver.findElement(By.id("clearPass")).sendKeys("pass");
+		/*Select sc = new Select(driver.findElement(By.name("languageChoice")));
+		sc.selectByValue("18");*/
+		driver.findElement(By.className("fa-sign-in")).click();
+		Actions act  = new Actions(driver);
+		act.moveToElement(driver.findElement(By.xpath("//div[text()='Patient/Client']"))).build().perform();
+		 act
+			.keyDown(Keys.CONTROL)
+			.pause(Duration.ofSeconds(1))
+			.build()
+			.perform();
+		driver.findElement(By.xpath("//div[text()='New/Search']")).click();
+		driver.switchTo().frame(driver.findElement(By.name("pat")));
+		Thread.sleep(1000);
+		driver.findElement(By.name("form_fname")).sendKeys("Baburao");
+		driver.findElement(By.name("form_lname")).sendKeys("Apte");
+		driver.findElement(By.id("form_DOB")).click();
+		act.moveToElement(driver.findElement(By.xpath("//div[text()='17']"))).build().perform();
+		driver.findElement(By.xpath("//div[text()='17']")).click();
+		Select sc1 = new Select(driver.findElement(By.id("form_sex")));
+		sc1.selectByValue("Male");
+		driver.findElement(By.id("create")).click();
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(driver.findElement(By.id("modalframe")));
+		driver.findElement(By.xpath("//input[@value='Confirm Create New Patient']")).click();
+		
+	}
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+(spicejet assignment)
+
 package initialize;
 
 import java.util.concurrent.TimeUnit;
